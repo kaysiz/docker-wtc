@@ -1,13 +1,14 @@
-FROM ruby
-LABEL Description="Containerizes a Ruby on Rails application."
-LABEL maintainer="ksiziva <ksiziva@student.wethinkcode.co.za>"
-RUN ["apt-get", "update"]
-RUN ["apt-get", "install", "-y", "sqlite3"]
-RUN ["apt-get", "install", "-y", "nodejs"]
-RUN ["gem", "install", "rails"]
-ONBUILD COPY [".", "/opt/app"]
-ONBUILD WORKDIR /opt/app
-ONBUILD RUN ["bundle", "install"]
-ONBUILD RUN ["rails", "db:migrate"]
-ONBUILD RUN ["rails", "db:seed"]
-ONBUILD EXPOSE 3000
+FROM ft-rails:on-build
+
+LABEL maintainer="ksiziva<ksiziva@student.wethinkcode.co.za>"
+
+# Add a script to be executed every time the container starts.
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+CMD ["rails", "s", "-b", "0.0.0.0", "-p", "3000"]
+
+#docker build -t ex02 .
+#docker run -it --rm -p 3000:3000 ex02
