@@ -4,3 +4,6 @@ LABEL maintainer="ksiziva <ksiziva@student.wethinkcode.co.za>"
 RUN ["apk", "update"]
 RUN ["apk", "add", "vim"]
 ENTRYPOINT ["vim"]
+
+# docker build -t ex00 .
+# docker run -it ex00 vim

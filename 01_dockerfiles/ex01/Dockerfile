@@ -12,3 +12,7 @@ EXPOSE 10011
 EXPOSE 41144
 WORKDIR /teamspeak3-server_linux_amd64
 ENTRYPOINT ["./ts3server_minimal_runscript.sh"]
+
+#docker build -t ex .
+#docker run -p 9987:9987/udp -p 10011:10011 -p 30033:30033 -e TS3SERVER_LICENSE=accept -t ex teamspeak
+#docker ps

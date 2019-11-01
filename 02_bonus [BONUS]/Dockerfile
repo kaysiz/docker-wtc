@@ -15,4 +15,8 @@ WORKDIR /app
 COPY ./app /app
 
 RUN adduser -D user
+RUN chmod +x /app
 USER user
+
+#docker-compose build -t bonus123 .
+#docker-compose run app sh -c "django-admin startproject app ."
